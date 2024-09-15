@@ -1,0 +1,50 @@
+<div class="time-calculator-container">
+  <h1>Time Calculator</h1>
+  <form [formGroup]="timeForm">
+    <div formArrayName="times">
+      <div
+        *ngFor="let time of timeArray.controls; let i = index"
+        [formGroupName]="i"
+        class="times-container"
+      >
+        <mat-form-field appearance="fill">
+          <mat-label>Hours</mat-label>
+          <input
+            matInput
+            formControlName="hours"
+            type="number"
+            placeholder="0"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Minutes</mat-label>
+          <input
+            matInput
+            formControlName="minutes"
+            type="number"
+            placeholder="0"
+          />
+        </mat-form-field>
+        <button
+          mat-button
+          class="remove-btn"
+          matTooltip="Alternatively use the '-' key"
+          (click)="removeTime(i)"
+        >
+          Remove
+        </button>
+      </div>
+    </div>
+    <button
+      mat-raised-button
+      matTooltip="Alternatively use the '+' key"
+      color="primary"
+      (click)="addTime()"
+    >
+      Add Time
+    </button>
+  </form>
+
+  <h2>Total Time:</h2>
+  <h1>{{ totalHours() }} hours and {{ totalMinutes() }} minutes</h1>
+</div>
