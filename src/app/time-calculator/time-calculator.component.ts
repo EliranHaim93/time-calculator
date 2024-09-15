@@ -1,4 +1,12 @@
-import { Component, signal, computed, HostListener } from "@angular/core";
+import {
+  Component,
+  signal,
+  computed,
+  HostListener,
+  ElementRef,
+  QueryList,
+  ViewChildren,
+} from "@angular/core";
 import {
   FormBuilder,
   FormArray,
@@ -35,6 +43,8 @@ export class TimeCalculatorComponent {
       this.removeTime(-1);
     }
   }
+  // Get access to all input elements dynamically
+  @ViewChildren("timeInput") timeInputs!: QueryList<ElementRef>;
 
   timeForm: FormGroup;
   totalHours = signal(0);
@@ -61,6 +71,13 @@ export class TimeCalculatorComponent {
 
   addTime() {
     this.timeArray.push(this.createTime());
+
+    // Give the new input some time to render before focusing on it
+    setTimeout(() => {
+      // Focus on the last (newly added) input element
+      const lastInput = this.timeInputs.last.nativeElement;
+      lastInput.focus();
+    });
   }
 
   removeTime(index: number) {
