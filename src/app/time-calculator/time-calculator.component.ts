@@ -69,6 +69,12 @@ export class TimeCalculatorComponent {
     });
   }
 
+  onKeydown(event: KeyboardEvent) {
+    if (event.key === "+" || event.key === "-") {
+      event.preventDefault(); // Prevent the default behavior of typing '+'
+    }
+  }
+
   addTime() {
     this.timeArray.push(this.createTime());
 
