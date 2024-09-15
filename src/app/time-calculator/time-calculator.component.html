@@ -10,10 +10,12 @@
         <mat-form-field appearance="fill" class="time-input">
           <mat-label>Hours</mat-label>
           <input
+            #timeInput
             matInput
             formControlName="hours"
             type="number"
             placeholder="0"
+            autofocus
           />
         </mat-form-field>
         <mat-form-field appearance="fill" class="time-input">
